@@ -123,6 +123,20 @@ tr.is-done td:first-child { text-decoration: line-through; }
 .add-row-btn { margin-top: 12px; color: var(--color-text-muted); font-size: 12.5px; padding: 6px 14px; border-radius: var(--radius-pill); background: var(--color-surface-sunken); transition: var(--transition); }
 .add-row-btn:hover { color: var(--red); }
 
+/* 台词模板 */
+.script-block { margin: 0 0 4px; }
+.script-title {
+  font-family: var(--font-serif); font-size: 17px; font-weight: 600;
+  padding: 18px 0 6px; border-bottom: 1px solid var(--color-border);
+  outline: none;
+}
+.script-title::before { content: "❧ "; color: var(--red); }
+.script-body {
+  padding: 14px 0 6px; white-space: pre-line; color: var(--color-text);
+  font-size: 14px; line-height: 1.9; outline: none; border-radius: 8px;
+}
+.script-body:focus, .script-title:focus { background: var(--red-soft); }
+
 /* 同步状态胶囊 */
 .sync-pill {
   display: inline-flex; align-items: center; gap: 8px;
@@ -216,6 +230,183 @@ tr.is-done td:first-child { text-decoration: line-through; }
             <tr><td class="time-cell">20:10</td><td>结束</td><td>感谢帮忙亲友，收尾</td><td class="owner-cell">新郎、新娘</td><td>—</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <h2 class="headline">详细流程与台词模板<span class="sub">点击即可编辑 · 改动自动同步</span></h2>
+      <div id="groomScripts">
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">16:20-16:35 新人迎客、宾客到来、暖场</h3>
+          <div class="script-body" contenteditable="true">- 16:20开始迎客。
+- 轻快音乐。
+- 大屏幕循环播放新人视频/婚纱照。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">16:35-16:50 亲朋好友合影</h3>
+          <div class="script-body" contenteditable="true">- 分批合影：男方亲戚、女方亲戚、好友、同学同事。
+- 大屏继续循环播放视频，音量调低。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">16:50-17:00 新郎最后确认</h3>
+          <div class="script-body" contenteditable="true">由新郎逐项确认：
+1. 话筒2支及电池。
+2. 戒指盒交给好友甲、闺蜜乙。
+3. 音乐伴奏全部试放。
+4. 手卡：新郎、新娘、父母发言稿。
+5. 甲乙就位，确认上台路线和台词。
+6. 大屏停止新人视频，切换仪式背景。
+7. 灯光、追光、合影灯。
+8. 与酒店确认：17:30准时上菜，18:30菜齐。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:00-17:02 新郎开场</h3>
+          <div class="script-body" contenteditable="true">新郎：“各位家人、亲戚、朋友，晚上好。我是今天的新郎XXX。感谢大家来参加我和XXX的婚礼。今天我们没有请司仪，不是省事，是我们想自己说、自己主持，把这场婚礼办成我们自己的样子。可能说得不够专业，但一定都是真心话。仪式大概半小时，五点半准时开席。现在，我们的婚礼开始。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:02-17:04 新郎介绍</h3>
+          <div class="script-body" contenteditable="true">新郎：“先简单介绍一下。我是XXX，新娘是XXX。我们认识在XXX，到现在X年。她经常说我不浪漫，所以今天我把想说的话一次说完。她是一个XXX的人，也是我想一起过日子的人。接下来，请大家把目光看向入口，有请我的新娘XXX，有请岳父大人。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:04-17:07 新娘入场、交接</h3>
+          <div class="script-body" contenteditable="true">音乐起。女方父亲牵新娘走到新郎面前。
+
+新郎对岳父：“爸，谢谢您把XXX养大，也谢谢您信任我。今天当着大家的面，我向您保证：我会尊重她、照顾她，遇事和她商量，不让她受委屈。”
+
+岳父可提前准备：“今天我把女儿交给你，你们要互敬互爱，好好过日子。”
+
+新郎：“谢谢爸。”然后向岳父鞠躬或拥抱。牵过新娘。新娘可对父亲说：“爸，谢谢您。”父亲回座。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:07-17:09 新人上台</h3>
+          <div class="script-body" contenteditable="true">新郎：“谢谢爸爸。今天我不只是娶了一个人，也是多了一家人。”
+
+新娘：“我也不是离开家，而是多了一个家。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:09-17:14 交换戒指</h3>
+          <div class="script-body" contenteditable="true">好友甲、闺蜜乙拿戒指盒上台。麦克风交给甲、乙，由他们临时主持。甲、乙只讲以下四句，不额外加词。
+
+甲：“现在，请新郎新娘交换戒指。”
+乙：“请新郎为新娘戴上戒指。”
+甲：“请新娘为新郎戴上戒指。”
+乙：“戒指戴上了，从今天起，你们就是夫妻了。”
+
+交换完，甲、乙拿走戒指盒下场，麦克风交回新郎新娘。
+
+新郎戴戒指时可说：“XXX，这枚戒指不是最贵的，但它代表我以后每天的选择：选你、站你、和你一起。”
+
+新娘戴戒指时可说：“XXX，我也给你戴上。以后我们是夫妻，也是队友。有事一起扛，有福一起享。”
+
+两人可一起说：“我们愿意。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:14-17:17 新郎讲话</h3>
+          <div class="script-body" contenteditable="true">新郎：“今天最想说的是谢谢。谢谢我的爸妈，谢谢你们一直支持我。谢谢岳父岳母，谢谢你们把XXX交给我。谢谢所有亲友，你们都是我们人生里重要的人。最后谢谢XXX，未来很长，请多指教。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:17-17:19 新娘讲话</h3>
+          <div class="script-body" contenteditable="true">新娘：“我也想谢谢我的爸妈，谢谢你们把我当宝贝。今天我不是离开家，而是多了一个家。谢谢公公婆婆，谢谢你们养出XXX。以后我们一起孝敬四位老人。也谢谢我的先生，我们慢慢走，好好过。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:19-17:23 双方父母讲话</h3>
+          <div class="script-body" contenteditable="true">新郎：“下面请双方父母说几句话。我们提前说好，每位控制在两分钟内。”
+
+新娘：“先请男方父母代表，再请女方父母代表。”
+
+参考发言：
+男方父亲：“感谢亲家，感谢各位来宾。孩子们长大了，希望你们互敬互爱，把日子过好。大家吃好喝好。”
+
+女方父亲：“今天把女儿交给XXX，我们放心。希望你们互相包容，常回家看看。”
+
+如果四位父母都要讲，建议每人30秒到1分钟，不然五点半开席会来不及。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:23-17:27 新人合唱</h3>
+          <div class="script-body" contenteditable="true">新郎：“我们俩不请司仪，但准备了一首歌。唱得不一定好，但每一句都是真的。”
+
+新娘：“送给彼此，也送给在座每一位。”
+
+歌可选：《今天你要嫁给我》《Perfect》《最重要的决定》《小幸运》《慢慢喜欢你》。建议只唱一段+副歌，控制在4分钟。
+
+唱完两人一起：“谢谢大家。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:27-17:30 致谢、开席祝酒</h3>
+          <div class="script-body" contenteditable="true">新郎：“仪式到这里，感谢大家见证。”
+
+新娘：“现在请大家端起酒杯，一起祝我们新婚快乐，也祝大家身体健康、万事如意。”
+
+两人一起：“干杯！开席！”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">17:30-18:30 上菜、用餐</h3>
+          <div class="script-body" contenteditable="true">- 17:30开席。
+- 酒店上菜1小时。
+- 18:30菜齐。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">18:30-18:55 逐桌敬酒</h3>
+          <div class="script-body" contenteditable="true">菜齐后，男方和女方开始敬酒。
+
+集体敬酒流程：每桌走到桌边 → 父母引荐 → 新人说一句祝酒词 → 全桌一起举杯 → 长辈桌多寒暄30秒 → 下一桌。
+
+人员分工：
+- 男方父母引荐男方亲友、长辈桌。
+- 女方父母引荐女方亲友、长辈桌。
+- 好友甲跟在新郎旁边，帮忙拿酒瓶、倒酒。
+- 闺蜜乙跟在新娘旁边，帮忙拿酒瓶、倒酒。
+
+时间预估：15桌，每桌约1-1.5分钟，总计约20-25分钟（含移动、合影、寒暄），留5分钟缓冲，19:00前结束敬酒。
+
+敬酒台词参考——
+到长辈桌，父母引荐：“这是XXX的叔叔/阿姨/长辈，来，新郎新娘敬大家一杯。”
+新郎/新娘：“叔叔阿姨好，感谢大家来参加我们的婚礼，我们敬您一杯，祝您身体健康。”
+全桌：“新婚快乐！”
+新人：“谢谢大家，大家吃好喝好。”
+
+到好友桌：“感谢大家来见证，我们敬大家一杯，大家随意，吃好喝好。”
+
+注意：普通桌只集体举杯，不逐人碰杯；长辈桌可多寒暄30秒；甲、乙及时倒酒，别让新人自己找酒瓶。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">19:00-19:20 送宾客好友</h3>
+          <div class="script-body" contenteditable="true">- 门口送客。
+- 父母送长辈，新人送好友。
+- 普通宾客点头致意即可。
+- 控制20分钟。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">19:20-19:35 敬茶改口</h3>
+          <div class="script-body" contenteditable="true">送客后，请双方父母回到舞台前或主桌就座。准备茶具、红包、跪垫。
+
+流程：
+1. 新人先给男方父母敬茶。
+2. 再给女方父母敬茶。
+3. 每对父母约5-7分钟。
+
+台词参考——
+新郎/新娘端茶：“爸、妈，请喝茶。”
+父母喝一口，给红包：“好，以后就是一家人了，好好过日子。”
+新人鞠躬：“谢谢爸、妈。”</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">19:35-19:55 男方亲戚给新娘发红包</h3>
+          <div class="script-body" contenteditable="true">请男方亲戚依次上前，给新娘红包并说祝福。如果亲戚多，可2-3人一组，不要每个人单独长篇讲话。
+
+亲戚：“欢迎你加入我们家，这是叔叔/阿姨的一点心意。”
+新娘：“谢谢叔叔/阿姨，我会和XXX好好过日子。”
+新郎：“谢谢大家。”
+
+准备一个托盘或袋子收红包，安排一个靠谱亲友在旁边帮忙记录和保管。
+
+时间预估：共20分钟，2-3人一组，每组约1-1.5分钟，约10-15组。</div>
+        </div>
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">19:55-20:10 收尾合影</h3>
+          <div class="script-body" contenteditable="true">- 与双方父母、亲戚、好友合影。
+- 收拾物品。
+- 感谢帮忙亲友。
+- 20:10左右结束。</div>
+        </div>
       </div>
     </section>
 
@@ -489,6 +680,11 @@ function exportExcel(which) {
     const ws = XLSX.utils.aoa_to_sheet(tableToAOA(document.getElementById('groomTable')));
     ws['!cols'] = [{wch:13},{wch:16},{wch:46},{wch:34},{wch:30}];
     XLSX.utils.book_append_sheet(wb, ws, '男方婚礼流程');
+    const scriptAoa = [['环节', '详细流程与台词']];
+    readScripts().forEach(r => scriptAoa.push(r));
+    const sws = XLSX.utils.aoa_to_sheet(scriptAoa);
+    sws['!cols'] = [{wch:26},{wch:90}];
+    XLSX.utils.book_append_sheet(wb, sws, '男方台词模板');
   }
   if (which === 'bride' || which === 'all') {
     const ws = XLSX.utils.aoa_to_sheet(tableToAOA(document.getElementById('brideTable')));
@@ -596,12 +792,38 @@ function fillVenueTable(rows) {
     tbody.appendChild(tr);
   });
 }
+function readScripts() {
+  const rows = [];
+  document.querySelectorAll('#groomScripts .script-block').forEach(b => {
+    rows.push([b.querySelector('.script-title').innerText.trim(), b.querySelector('.script-body').innerText]);
+  });
+  return rows;
+}
+function fillScripts(rows) {
+  const root = document.getElementById('groomScripts');
+  root.innerHTML = '';
+  rows.forEach(([title, body]) => {
+    const div = document.createElement('div');
+    div.className = 'script-block';
+    const h = document.createElement('h3');
+    h.className = 'script-title';
+    h.setAttribute('contenteditable', 'true');
+    h.textContent = title;
+    const b = document.createElement('div');
+    b.className = 'script-body';
+    b.setAttribute('contenteditable', 'true');
+    b.textContent = body;
+    div.appendChild(h); div.appendChild(b);
+    root.appendChild(div);
+  });
+}
 function serializeState() {
   return {
     groom: readFlowTable('groomTable'),
     bride: readFlowTable('brideTable'),
     venue: readVenueTable(),
     checklist: readChecklistFromDOM(),
+    scripts: readScripts(),
   };
 }
 function fillFlowTable(tableId, rows) {
@@ -634,6 +856,7 @@ function applyState(data) {
   if (Array.isArray(data.bride)) fillFlowTable('brideTable', data.bride);
   if (Array.isArray(data.venue)) fillVenueTable(data.venue);
   if (Array.isArray(data.checklist)) { checklistData = data.checklist; renderChecklist(); }
+  if (Array.isArray(data.scripts)) fillScripts(data.scripts);
 }
 
 /* ============ 在线协同（JSONBin 轮询同步） ============ */
@@ -719,7 +942,7 @@ function initSync() {
 
 /* 任意编辑（输入/勾选/加行）都触发自动保存 */
 document.addEventListener('input', e => {
-  if (e.target.closest && e.target.closest('td')) schedulePush();
+  if (e.target.closest && e.target.closest('[contenteditable]')) schedulePush();
 });
 document.addEventListener('change', e => {
   if (e.target.matches && e.target.matches('input[type=checkbox]')) schedulePush();
