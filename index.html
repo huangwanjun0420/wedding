@@ -123,6 +123,19 @@ tr.is-done td:first-child { text-decoration: line-through; }
 .add-row-btn { margin-top: 12px; color: var(--color-text-muted); font-size: 12.5px; padding: 6px 14px; border-radius: var(--radius-pill); background: var(--color-surface-sunken); transition: var(--transition); }
 .add-row-btn:hover { color: var(--red); }
 
+/* 行删除按钮 */
+td.del-cell { width: 34px; padding-right: 0; border-bottom: inherit; vertical-align: middle; }
+.row-del {
+  width: 22px; height: 22px; border-radius: 50%;
+  color: var(--color-text-subtle); font-size: 14px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  opacity: 0; transition: var(--transition);
+}
+tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
+.row-del:hover { background: var(--red-soft); color: var(--red); }
+.script-block { position: relative; }
+.script-block > .row-del { position: absolute; right: 0; top: 16px; }
+
 /* 台词模板 */
 .script-block { margin: 0 0 4px; }
 .script-title {
@@ -497,6 +510,34 @@ document.querySelectorAll('#groomTable td, #brideTable td').forEach(td => {
   td.setAttribute('contenteditable', 'true');
 });
 
+/* ============ 行删除 ============ */
+function makeDelBtn(onclick) {
+  const btn = document.createElement('button');
+  btn.className = 'row-del';
+  btn.title = '删除此行';
+  btn.textContent = '×';
+  btn.onclick = e => { e.stopPropagation(); onclick(); schedulePush(); };
+  return btn;
+}
+function attachRowDel(tr) {
+  if (tr.querySelector('.del-cell')) return;
+  const td = document.createElement('td');
+  td.className = 'del-cell';
+  td.appendChild(makeDelBtn(() => {
+    if (confirm('确定删除这一行吗？')) tr.remove();
+  }));
+  tr.appendChild(td);
+}
+function attachScriptDel(block) {
+  if (block.querySelector(':scope > .row-del')) return;
+  block.appendChild(makeDelBtn(() => {
+    if (confirm('确定删除这个环节台词吗？')) block.remove();
+  }));
+}
+/* 初始化：给现有行和台词块挂删除按钮 */
+document.querySelectorAll('#groomTable tbody tr, #brideTable tbody tr, #venueTable tbody tr').forEach(attachRowDel);
+document.querySelectorAll('#groomScripts .script-block').forEach(attachScriptDel);
+
 /* ============ 添加行 ============ */
 function addRow(tableId) {
   const tbody = document.getElementById(tableId).querySelector('tbody');
@@ -508,6 +549,7 @@ function addRow(tableId) {
     td.textContent = '—';
     tr.appendChild(td);
   }
+  attachRowDel(tr);
   tbody.appendChild(tr);
   toast('已添加一行，可直接编辑');
 }
@@ -516,6 +558,7 @@ function addVenueRow() {
   const tbody = document.getElementById('venueTable').querySelector('tbody');
   const tr = document.createElement('tr');
   tr.innerHTML = `<td contenteditable="true">新场地</td><td contenteditable="true">（待填）</td><td contenteditable="true">（待填）</td><td contenteditable="true">（待填）</td><td><label class="done-check"><input type="checkbox">已定</label></td>`;
+  attachRowDel(tr);
   tbody.appendChild(tr);
   schedulePush();
   toast('已添加一行，可直接编辑');
@@ -619,6 +662,7 @@ function renderChecklist() {
           tr.classList.toggle('is-done', item[2]);
           updateCount(sec, cat, ci);
         });
+        attachChecklistDel(tr, sub, item, sec, cat, ci);
         tbody.appendChild(tr);
       });
       table.appendChild(tbody);
@@ -633,12 +677,14 @@ function renderChecklist() {
           <td><label class="done-check"><input type="checkbox">备好</label></td>
           <td contenteditable="true">—</td>`;
         const idx = sub.items.length;
-        sub.items.push(['新物品', '1', false, '—']);
+        const newItem = ['新物品', '1', false, '—'];
+        sub.items.push(newItem);
         tr.querySelector('input').addEventListener('change', e => {
-          sub.items[idx][2] = e.target.checked;
+          newItem[2] = e.target.checked;
           tr.classList.toggle('is-done', e.target.checked);
           updateCount(sec, cat, ci);
         });
+        attachChecklistDel(tr, sub, newItem, sec, cat, ci);
         tbody.appendChild(tr);
         updateCount(sec, cat, ci);
         schedulePush();
@@ -647,6 +693,18 @@ function renderChecklist() {
     });
     root.appendChild(sec);
   });
+}
+function attachChecklistDel(tr, sub, item, sec, cat, ci) {
+  const td = document.createElement('td');
+  td.className = 'del-cell';
+  td.appendChild(makeDelBtn(() => {
+    if (!confirm('确定删除这一项吗？')) return;
+    const k = sub.items.indexOf(item);
+    if (k > -1) sub.items.splice(k, 1);
+    tr.remove();
+    updateCount(sec, cat, ci);
+  }));
+  tr.appendChild(td);
 }
 function updateCount(sec, cat, ci) {
   const total = cat.subs.reduce((n, s) => n + s.items.length, 0);
@@ -660,7 +718,7 @@ function tableToAOA(table) {
   const rows = [];
   table.querySelectorAll('tr').forEach(tr => {
     const row = [];
-    tr.querySelectorAll('th, td').forEach(cell => {
+    tr.querySelectorAll('th, td:not(.del-cell)').forEach(cell => {
       if (cell.querySelector('input[type=checkbox]')) {
         row.push(cell.querySelector('input').checked ? '已备好' : '未备好');
       } else {
@@ -722,7 +780,7 @@ function readFlowTable(tableId) {
   const rows = [];
   document.querySelectorAll('#' + tableId + ' tbody tr').forEach(tr => {
     const row = [];
-    tr.querySelectorAll('td').forEach(td => {
+    tr.querySelectorAll('td:not(.del-cell)').forEach(td => {
       const descs = td.querySelectorAll('.owner-desc');
       if (descs.length) {
         // 负责人列：按子节点顺序重组为 "名字（说明）；名字（说明）"
@@ -747,7 +805,7 @@ function readChecklistFromDOM() {
     sec.querySelectorAll('.sub-cat').forEach(subEl => {
       const sub = { name: subEl.textContent, items: [] };
       subEl.nextElementSibling.querySelectorAll('tbody tr').forEach(tr => {
-        const tds = tr.querySelectorAll('td');
+        const tds = tr.querySelectorAll('td:not(.del-cell)');
         sub.items.push([
           tds[0].innerText.replace(/\n/g, ' ').trim(),
           tds[1].innerText.replace(/\n/g, ' ').trim(),
@@ -764,7 +822,7 @@ function readChecklistFromDOM() {
 function readVenueTable() {
   const rows = [];
   document.querySelectorAll('#venueTable tbody tr').forEach(tr => {
-    const tds = tr.querySelectorAll('td');
+    const tds = tr.querySelectorAll('td:not(.del-cell)');
     rows.push([
       tds[0].innerText.replace(/\n/g, ' ').trim(),
       tds[1].innerText.replace(/\n/g, ' ').trim(),
@@ -789,6 +847,7 @@ function fillVenueTable(rows) {
     const td = document.createElement('td');
     td.innerHTML = `<label class="done-check"><input type="checkbox" ${row[4] ? 'checked' : ''}>已定</label>`;
     tr.appendChild(td);
+    attachRowDel(tr);
     tbody.appendChild(tr);
   });
 }
@@ -814,6 +873,7 @@ function fillScripts(rows) {
     b.setAttribute('contenteditable', 'true');
     b.textContent = body;
     div.appendChild(h); div.appendChild(b);
+    attachScriptDel(div);
     root.appendChild(div);
   });
 }
@@ -845,6 +905,7 @@ function fillFlowTable(tableId, rows) {
       }
       tr.appendChild(td);
     });
+    attachRowDel(tr);
     tbody.appendChild(tr);
   });
 }
