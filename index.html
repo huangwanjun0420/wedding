@@ -178,7 +178,7 @@ tr.is-done td:first-child { text-decoration: line-through; }
     <section class="tab-panel is-active" id="tab-groom">
       <p class="eyebrow">Wedding Ceremony · 新郎家主场</p>
       <h1 class="display">男方婚礼<span class="accent">流程</span></h1>
-      <p class="lede">17:00 宾客签到 · 17:30 仪式开始 · 18:00 准时开席 · 无司仪，新人自主持</p>
+      <p class="lede">16:20 新人迎客 · 17:00 仪式开始 · 17:30 开席 · 20:10 结束 · 无司仪，新人自主持</p>
 
       <div class="toolbar">
         <button class="btn btn-secondary btn-sm" onclick="addRow('groomTable')">＋ 添加环节</button>
@@ -193,19 +193,27 @@ tr.is-done td:first-child { text-decoration: line-through; }
             <tr><th>时间</th><th>环节</th><th>说明</th><th>负责人（工作说明）</th><th>对应材料</th></tr>
           </thead>
           <tbody>
-            <tr><td class="time-cell">17:00-17:25</td><td>宾客签到、暖场</td><td>放轻快音乐，新人补妆，亲友合影</td><td class="owner-cell">伴娘/伴郎<span class="owner-desc">引导签到、递签到本、播放暖场音乐</span></td><td>签到本、签到笔、暖场歌单、合影区布置</td></tr>
-            <tr><td class="time-cell">17:25-17:30</td><td>宾客落座</td><td>双方父母主桌就座，音响、话筒、戒指确认</td><td class="owner-cell">伴郎<span class="owner-desc">引导宾客入座，检查音响话筒；戒指交新人确认</span></td><td>话筒×2、音响设备、对戒、座位表</td></tr>
-            <tr><td class="time-cell">17:30-17:32</td><td>新郎开场</td><td>欢迎来宾，说明没有司仪、仪式约30分钟（台词见备注）</td><td class="owner-cell">新郎<span class="owner-desc">手持话筒开场致辞，控制节奏</span></td><td>台词稿、话筒</td></tr>
-            <tr><td class="time-cell">17:32-17:34</td><td>新郎介绍</td><td>介绍自己、新娘、简单爱情经历，引出新娘入场</td><td class="owner-cell">新郎<span class="owner-desc">介绍结束语："有请我的新娘，有请岳父大人"</span></td><td>台词稿</td></tr>
-            <tr><td class="time-cell">17:34-17:37</td><td>新娘入场、交接</td><td>女方父亲牵新娘走到交接区，新郎承诺、鞠躬/拥抱，父亲回座</td><td class="owner-cell">岳父、新郎<span class="owner-desc">岳父牵新娘入场并交接；伴郎负责此时切换入场音乐</span></td><td>入场音乐、交接区布置</td></tr>
-            <tr><td class="time-cell">17:37-17:39</td><td>新人上台</td><td>感谢父亲，新人站定（"多了一家人"台词）</td><td class="owner-cell">新郎、新娘<span class="owner-desc">共同上台，面向宾客站定</span></td><td>背景音乐（轻柔）</td></tr>
-            <tr><td class="time-cell">17:39-17:42</td><td>交换戒指</td><td>互戴戒指、说誓词，一起说"我们愿意"</td><td class="owner-cell">伴郎/伴娘<span class="owner-desc">递上戒指盒，递后退到侧台</span></td><td>对戒、戒指盒</td></tr>
-            <tr><td class="time-cell">17:42-17:45</td><td>新郎讲话</td><td>感谢父母、岳父母、亲友、新娘</td><td class="owner-cell">新郎<span class="owner-desc">控制在3分钟内，重点说"谢谢"</span></td><td>台词稿</td></tr>
-            <tr><td class="time-cell">17:45-17:47</td><td>新娘讲话</td><td>感谢父母、公婆、新郎，"一起孝敬四位老人"</td><td class="owner-cell">新娘<span class="owner-desc">控制在2分钟内</span></td><td>台词稿</td></tr>
-            <tr><td class="time-cell">17:47-17:52</td><td>双方父母讲话</td><td>建议各派一位代表，每人2分钟内；若四位都讲每人1分钟内</td><td class="owner-cell">双方父母<span class="owner-desc">提前沟通好代表与时长；新郎负责递话筒</span></td><td>话筒×2、父母发言稿（备用）</td></tr>
-            <tr><td class="time-cell">17:52-17:56</td><td>新人合唱</td><td>建议只唱一段+副歌，控制4分钟；可选《今天你要嫁给我》《Perfect》《最重要的决定》等</td><td class="owner-cell">新郎、新娘<span class="owner-desc">提前彩排；伴郎负责播放伴奏</span></td><td>伴奏音乐、话筒×2、歌词提示卡（备用）</td></tr>
-            <tr><td class="time-cell">17:56-18:00</td><td>致谢、开席祝酒</td><td>一起举杯，"干杯！开席！"，18:00准时开席</td><td class="owner-cell">新郎、新娘<span class="owner-desc">带领全场举杯；酒店同步开始上菜</span></td><td>香槟/酒杯、开席通知（提前告知酒店）</td></tr>
-            <tr><td class="time-cell">18:00 起</td><td>吃席、逐桌敬酒</td><td>约18:10开始逐桌敬酒</td><td class="owner-cell">新人、伴郎伴娘<span class="owner-desc">伴郎伴娘陪同敬酒、挡酒、收红包</span></td><td>敬酒服（可换装）、酒杯、红包袋</td></tr>
+            <tr><td class="time-cell">16:20-16:35</td><td>宾客到来、暖场</td><td>16:20新人迎客；轻快音乐；父母入座；大屏幕循环播放新人视频/婚纱照</td><td class="owner-cell">新郎、新娘<span class="owner-desc">门口迎客</span>；好友甲<span class="owner-desc">播放暖场音乐与大屏视频</span></td><td>暖场歌单、新人视频/婚纱照（U盘+电脑双备份）、大屏</td></tr>
+            <tr><td class="time-cell">16:35-16:50</td><td>亲朋好友合影</td><td>分批合影：男方亲戚、女方亲戚、好友、同学同事；大屏继续循环播放视频，音量调低</td><td class="owner-cell">好友甲<span class="owner-desc">组织分批合影顺序、控制大屏音量</span></td><td>合影区、大屏视频</td></tr>
+            <tr><td class="time-cell">16:50-17:00</td><td>新郎最后确认</td><td>逐项确认：话筒2支及电池、戒指盒交甲乙、音乐伴奏试放、手卡、甲乙就位、大屏切换仪式背景、灯光、与酒店确认17:30上菜18:30菜齐</td><td class="owner-cell">新郎<span class="owner-desc">拿确认清单逐项打勾</span></td><td>确认清单、话筒×2+备用电池、戒指盒、手卡（新郎/新娘/父母发言稿）</td></tr>
+            <tr><td class="time-cell">17:00-17:02</td><td>新郎开场</td><td>欢迎来宾，说明没有司仪、17:30开席（台词见文档）</td><td class="owner-cell">新郎<span class="owner-desc">手持话筒开场致辞，控制节奏</span></td><td>台词稿、话筒</td></tr>
+            <tr><td class="time-cell">17:02-17:04</td><td>新郎介绍</td><td>介绍自己、新娘、简单爱情经历，引出新娘入场</td><td class="owner-cell">新郎<span class="owner-desc">结束语："有请我的新娘，有请岳父大人"</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">17:04-17:07</td><td>新娘入场、交接</td><td>女方父亲牵新娘走到交接区；新郎向岳父承诺；鞠躬/拥抱后父亲回座</td><td class="owner-cell">岳父、新郎<span class="owner-desc">好友甲此时切换入场音乐</span></td><td>入场音乐、交接区布置</td></tr>
+            <tr><td class="time-cell">17:07-17:09</td><td>新人上台</td><td>感谢父亲，新人站定（"多了一家人"台词）</td><td class="owner-cell">新郎、新娘<span class="owner-desc">共同上台，面向宾客站定</span></td><td>背景音乐（轻柔）</td></tr>
+            <tr><td class="time-cell">17:09-17:14</td><td>交换戒指</td><td>好友甲、闺蜜乙拿戒指盒上台，话筒交甲乙临时主持（只说四句词）；交换完甲乙拿走盒子下场，话筒交回新人</td><td class="owner-cell">好友甲、闺蜜乙<span class="owner-desc">递戒指盒+四句主持词，不额外加词</span></td><td>对戒、戒指盒、话筒</td></tr>
+            <tr><td class="time-cell">17:14-17:17</td><td>新郎讲话</td><td>感谢父母、岳父母、亲友、新娘</td><td class="owner-cell">新郎<span class="owner-desc">控制在3分钟内，重点说"谢谢"</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">17:17-17:19</td><td>新娘讲话</td><td>感谢父母、公婆、新郎，"一起孝敬四位老人"</td><td class="owner-cell">新娘<span class="owner-desc">控制在2分钟内</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">17:19-17:23</td><td>双方父母讲话</td><td>建议各派一位代表，每人2分钟内；若四位都讲每人1分钟内</td><td class="owner-cell">双方父母<span class="owner-desc">提前沟通代表与时长；新郎递话筒</span></td><td>话筒×2、父母发言稿（备用）</td></tr>
+            <tr><td class="time-cell">17:23-17:27</td><td>新人合唱</td><td>只唱一段+副歌，控制4分钟；可选《今天你要嫁给我》《Perfect》《最重要的决定》等</td><td class="owner-cell">新郎、新娘<span class="owner-desc">提前彩排；好友甲播放伴奏</span></td><td>伴奏音乐、话筒×2、歌词提示卡（备用）</td></tr>
+            <tr><td class="time-cell">17:27-17:30</td><td>致谢、开席祝酒</td><td>一起举杯，"干杯！开席！"，17:30准时开席</td><td class="owner-cell">新郎、新娘<span class="owner-desc">带领全场举杯；酒店同步开始上菜</span></td><td>酒杯、开席通知（提前告知酒店）</td></tr>
+            <tr><td class="time-cell">17:30-18:30</td><td>上菜、用餐</td><td>酒店上菜1小时，18:30菜齐</td><td class="owner-cell">酒店<span class="owner-desc">新郎提前与酒店确认上菜节奏</span></td><td>菜单确认表</td></tr>
+            <tr><td class="time-cell">18:30-18:55</td><td>逐桌敬酒</td><td>15桌集体敬酒，每桌约1.5分钟；顺序：主桌→女方长辈→男方长辈→好友→其他亲友；普通桌只集体举杯，长辈桌多寒暄30秒</td><td class="owner-cell">新人<span class="owner-desc">双方父母引荐</span>；好友甲、闺蜜乙<span class="owner-desc">跟在旁边拿酒瓶、及时倒酒</span></td><td>敬酒服（可换装）、酒瓶酒杯、红包袋</td></tr>
+            <tr><td class="time-cell">18:55-19:00</td><td>酒席收尾</td><td>新人回主桌，准备送客；19:00酒席结束，宾客陆续离场</td><td class="owner-cell">新郎、新娘<span class="owner-desc">回到主桌，整理随身物品</span></td><td>—</td></tr>
+            <tr><td class="time-cell">19:00-19:20</td><td>送宾客好友</td><td>门口送客；父母送长辈，新人送好友；普通宾客点头致意即可，控制20分钟</td><td class="owner-cell">新人、双方父母<span class="owner-desc">分工送客</span></td><td>—</td></tr>
+            <tr><td class="time-cell">19:20-19:35</td><td>敬茶改口</td><td>双方父母就座；先给男方父母敬茶，再给女方父母敬茶，每对约5-7分钟；父母给红包</td><td class="owner-cell">新郎、新娘<span class="owner-desc">好友甲、闺蜜乙提前备好茶具跪垫</span></td><td>茶具、跪垫、父母红包</td></tr>
+            <tr><td class="time-cell">19:35-19:55</td><td>男方亲戚给新娘发红包</td><td>亲戚依次上前（2-3人一组，每组1-1.5分钟），红包+祝福；托盘收纳，专人记录保管</td><td class="owner-cell">男方亲戚<span class="owner-desc">专人负责记录和保管红包</span></td><td>托盘/收纳袋、记录纸笔</td></tr>
+            <tr><td class="time-cell">19:55-20:10</td><td>收尾合影</td><td>与双方父母、亲戚、好友合影；收拾物品；感谢帮忙亲友</td><td class="owner-cell">新人、亲友<span class="owner-desc">摄影师/好友甲组织合影</span></td><td>相机、物品清单</td></tr>
+            <tr><td class="time-cell">20:10</td><td>结束</td><td>感谢帮忙亲友，收尾</td><td class="owner-cell">新郎、新娘</td><td>—</td></tr>
           </tbody>
         </table>
       </div>
@@ -256,6 +264,23 @@ tr.is-done td:first-child { text-decoration: line-through; }
         <button class="btn btn-red btn-sm" onclick="exportExcel('checklist')">下载 Excel</button>
       </div>
 
+      <!-- 婚礼场地独立模块 -->
+      <div class="check-section">
+        <div class="cat-head"><h2>婚礼场地</h2><span class="count">两场场地需分别确定</span></div>
+        <div class="table-wrap">
+          <table id="venueTable">
+            <thead>
+              <tr><th>场次</th><th>场地名称</th><th>地址</th><th>现场风格类型</th><th>已定好</th></tr>
+            </thead>
+            <tbody>
+              <tr><td contenteditable="true">男方婚礼场地</td><td contenteditable="true">（待填，如：XX酒店宴会厅）</td><td contenteditable="true">（待填详细地址）</td><td contenteditable="true">（如：中式红金 / 西式简约 / 户外草坪 / 酒店宴会厅）</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+              <tr><td contenteditable="true">女方答谢宴场地</td><td contenteditable="true">（待填，如：XX酒楼）</td><td contenteditable="true">（待填详细地址）</td><td contenteditable="true">（如：中式红金 / 西式简约 / 户外草坪 / 酒店宴会厅）</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="add-row-btn" onclick="addVenueRow()">＋ 添加场地</button>
+      </div>
+
       <!-- 清单由 JS 渲染 -->
       <div id="checklistRoot"></div>
     </section>
@@ -293,6 +318,15 @@ function addRow(tableId) {
     tr.appendChild(td);
   }
   tbody.appendChild(tr);
+  toast('已添加一行，可直接编辑');
+}
+
+function addVenueRow() {
+  const tbody = document.getElementById('venueTable').querySelector('tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td contenteditable="true">新场地</td><td contenteditable="true">（待填）</td><td contenteditable="true">（待填）</td><td contenteditable="true">（待填）</td><td><label class="done-check"><input type="checkbox">已定</label></td>`;
+  tbody.appendChild(tr);
+  schedulePush();
   toast('已添加一行，可直接编辑');
 }
 
@@ -462,6 +496,11 @@ function exportExcel(which) {
     XLSX.utils.book_append_sheet(wb, ws, '女方答谢宴流程');
   }
   if (which === 'checklist' || which === 'all') {
+    const venueAoa = [['场次', '场地名称', '地址', '现场风格类型', '已定好']];
+    readVenueTable().forEach(r => venueAoa.push([r[0], r[1], r[2], r[3], r[4] ? '已定' : '未定']));
+    const vws = XLSX.utils.aoa_to_sheet(venueAoa);
+    vws['!cols'] = [{wch:16},{wch:26},{wch:36},{wch:30},{wch:8}];
+    XLSX.utils.book_append_sheet(wb, vws, '婚礼场地');
     document.querySelectorAll('#checklistRoot .check-section').forEach(sec => {
       const catName = sec.querySelector('h2').textContent;
       const aoa = [];
@@ -488,10 +527,15 @@ function readFlowTable(tableId) {
   document.querySelectorAll('#' + tableId + ' tbody tr').forEach(tr => {
     const row = [];
     tr.querySelectorAll('td').forEach(td => {
-      const desc = td.querySelector('.owner-desc');
-      if (desc) {
-        const name = td.childNodes[0] ? td.childNodes[0].textContent.trim() : td.innerText.trim();
-        row.push(name + '（' + desc.innerText.replace(/\n/g, ' ').trim() + '）');
+      const descs = td.querySelectorAll('.owner-desc');
+      if (descs.length) {
+        // 负责人列：按子节点顺序重组为 "名字（说明）；名字（说明）"
+        let s = '';
+        td.childNodes.forEach(n => {
+          if (n.nodeType === Node.TEXT_NODE) s += n.textContent;
+          else if (n.classList && n.classList.contains('owner-desc')) s += '（' + n.innerText.replace(/\n/g, ' ').trim() + '）';
+        });
+        row.push(s.replace(/\n/g, ' ').trim());
       } else {
         row.push(td.innerText.replace(/\n/g, ' ').trim());
       }
@@ -521,10 +565,42 @@ function readChecklistFromDOM() {
   });
   return data;
 }
+function readVenueTable() {
+  const rows = [];
+  document.querySelectorAll('#venueTable tbody tr').forEach(tr => {
+    const tds = tr.querySelectorAll('td');
+    rows.push([
+      tds[0].innerText.replace(/\n/g, ' ').trim(),
+      tds[1].innerText.replace(/\n/g, ' ').trim(),
+      tds[2].innerText.replace(/\n/g, ' ').trim(),
+      tds[3].innerText.replace(/\n/g, ' ').trim(),
+      tr.querySelector('input[type=checkbox]').checked,
+    ]);
+  });
+  return rows;
+}
+function fillVenueTable(rows) {
+  const tbody = document.getElementById('venueTable').querySelector('tbody');
+  tbody.innerHTML = '';
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+    for (let i = 0; i < 4; i++) {
+      const td = document.createElement('td');
+      td.setAttribute('contenteditable', 'true');
+      td.textContent = row[i];
+      tr.appendChild(td);
+    }
+    const td = document.createElement('td');
+    td.innerHTML = `<label class="done-check"><input type="checkbox" ${row[4] ? 'checked' : ''}>已定</label>`;
+    tr.appendChild(td);
+    tbody.appendChild(tr);
+  });
+}
 function serializeState() {
   return {
     groom: readFlowTable('groomTable'),
     bride: readFlowTable('brideTable'),
+    venue: readVenueTable(),
     checklist: readChecklistFromDOM(),
   };
 }
@@ -538,11 +614,10 @@ function fillFlowTable(tableId, rows) {
       td.setAttribute('contenteditable', 'true');
       if (i === 0) td.className = 'time-cell';
       if (i === 3) td.className = 'owner-cell';
-      // 负责人列：把 "名字（说明）" 拆回两行小字样式
+      // 负责人列：把每个 "（说明）" 都拆成小字样式，支持多段
       if (i === 3 && cell.includes('（')) {
-        const idx = cell.indexOf('（');
-        td.innerHTML = escapeHtml(cell.slice(0, idx)) +
-          '<span class="owner-desc">' + escapeHtml(cell.slice(idx + 1).replace(/）$/, '')) + '</span>';
+        td.innerHTML = escapeHtml(cell).replace(/（([^（）]*)）/g,
+          '<span class="owner-desc">$1</span>');
       } else {
         td.textContent = cell;
       }
@@ -557,6 +632,7 @@ function escapeHtml(s) {
 function applyState(data) {
   if (Array.isArray(data.groom)) fillFlowTable('groomTable', data.groom);
   if (Array.isArray(data.bride)) fillFlowTable('brideTable', data.bride);
+  if (Array.isArray(data.venue)) fillVenueTable(data.venue);
   if (Array.isArray(data.checklist)) { checklistData = data.checklist; renderChecklist(); }
 }
 
