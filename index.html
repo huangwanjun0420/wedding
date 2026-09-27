@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>备婚流程安排</title>
+<style>
+:root {
+  --font-serif: "Source Serif Pro", "Noto Serif SC", Georgia, "Songti SC", serif;
+  --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", Roboto, sans-serif;
+  --color-bg: #fafaf8;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f2f2ef;
+  --color-text: #141412;
+  --color-text-muted: #6f6f6a;
+  --color-text-subtle: #a3a39d;
+  --color-text-inverse: #fafaf8;
+  --color-ink: #141412;
+  --color-border: #e8e8e4;
+  --color-border-soft: #eeeeea;
+  --red: #c0392b;
+  --red-soft: #f7ecec;
+  --radius-pill: 999px;
+  --radius-card: 20px;
+  --shadow-pill: 0 1px 2px rgba(20,20,18,.05), 0 8px 24px rgba(20,20,18,.07);
+  --shadow-pill-hover: 0 2px 4px rgba(20,20,18,.06), 0 12px 32px rgba(20,20,18,.1);
+  --transition: 200ms cubic-bezier(.4,0,.2,1);
+}
+* { box-sizing: border-box; }
+html { background: var(--color-bg); color: var(--color-text); -webkit-font-smoothing: antialiased; }
+body { margin: 0; min-height: 100vh; font-family: var(--font-sans); font-size: 15px; line-height: 1.7; }
+button, input, select { font: inherit; }
+button { border: 0; cursor: pointer; background: none; }
+
+/* ---------- 红色曲线装饰 ---------- */
+.ribbon { position: fixed; pointer-events: none; z-index: 0; }
+.ribbon path { fill: none; stroke: var(--red); }
+.ribbon-top { top: 0; left: 0; width: 100%; height: 160px; opacity: .28; }
+.ribbon-bottom { bottom: 0; right: 0; width: 100%; height: 140px; opacity: .22; }
+.heart-deco { color: var(--red); font-size: 13px; letter-spacing: 6px; }
+
+.page { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
+.topbar {
+  height: 72px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+}
+.brand { font-family: var(--font-serif); font-weight: 600; font-size: 17px; letter-spacing: .02em; }
+.brand .heart-deco { margin-left: 8px; }
+.textnav { display: flex; gap: 28px; }
+.textnav-item {
+  position: relative; padding: 8px 0; color: var(--color-text-muted);
+  font-size: 14px; transition: color var(--transition);
+}
+.textnav-item:hover { color: var(--color-text); }
+.textnav-item.is-active { color: var(--color-text); }
+.textnav-item.is-active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px; border-radius: 1px; background: var(--red);
+}
+
+.column { width: min(100% - 48px, 1080px); margin: 0 auto; padding: 40px 0 96px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--color-text-subtle); font-weight: 600; margin: 0 0 8px;
+}
+.display {
+  font-family: var(--font-serif); font-size: 40px; font-weight: 600;
+  letter-spacing: -.02em; line-height: 1.15; margin: 0 0 8px;
+}
+.display .accent { color: var(--red); }
+.lede { color: var(--color-text-muted); margin: 0 0 32px; }
+.headline { font-family: var(--font-serif); font-size: 26px; font-weight: 600; letter-spacing: -.01em; margin: 40px 0 12px; }
+.headline .sub { font-family: var(--font-sans); font-size: 13px; color: var(--color-text-subtle); font-weight: 400; margin-left: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 42px; padding: 0 22px; border-radius: var(--radius-pill);
+  font-size: 13px; font-weight: 500;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.btn-primary { background: var(--color-ink); color: var(--color-text-inverse); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-pill-hover); }
+.btn-red { background: var(--red); color: #fff; }
+.btn-red:hover { transform: translateY(-1px); box-shadow: var(--shadow-pill-hover); }
+.btn-secondary { background: var(--color-surface); color: var(--color-text); box-shadow: var(--shadow-pill); }
+.btn-secondary:hover { box-shadow: var(--shadow-pill-hover); transform: translateY(-1px); }
+.btn-sm { height: 30px; padding: 0 14px; font-size: 12px; }
+.toolbar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
+.toolbar .spacer { flex: 1; }
+.edit-hint { font-size: 12px; color: var(--color-text-subtle); }
+
+.tab-panel { display: none; }
+.tab-panel.is-active { display: block; animation: fade .3s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* 表格 */
+.table-wrap { background: var(--color-surface); border-radius: var(--radius-card); box-shadow: var(--shadow-pill); padding: 8px 24px 16px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+th {
+  text-align: left; font-weight: 500; color: var(--color-text-subtle);
+  font-size: 12px; letter-spacing: .08em; padding: 14px 16px 10px 0;
+  border-bottom: 1px solid var(--color-border); white-space: nowrap;
+}
+td { padding: 10px 16px 10px 0; border-bottom: 1px solid var(--color-border-soft); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+td[contenteditable="true"] { outline: none; border-radius: 6px; min-width: 40px; }
+td[contenteditable="true"]:focus { background: var(--red-soft); box-shadow: inset 0 0 0 1.5px var(--red); }
+td.time-cell { font-variant-numeric: tabular-nums; white-space: nowrap; font-family: var(--font-serif); font-weight: 600; }
+td.owner-cell { white-space: nowrap; }
+td .owner-desc { display: block; font-size: 11.5px; color: var(--color-text-subtle); }
+
+/* 清单页 */
+.check-section { margin-bottom: 48px; }
+.cat-head { display: flex; align-items: baseline; gap: 12px; margin: 36px 0 4px; }
+.cat-head h2 { font-family: var(--font-serif); font-size: 24px; font-weight: 600; margin: 0; }
+.cat-head .count { font-size: 12px; color: var(--color-text-subtle); }
+.sub-cat { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--red); font-weight: 600; margin: 24px 0 8px; }
+.done-check { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; white-space: nowrap; }
+.done-check input { accent-color: var(--red); width: 15px; height: 15px; }
+tr.is-done td { color: var(--color-text-subtle); }
+tr.is-done td:first-child { text-decoration: line-through; }
+
+.add-row-btn { margin-top: 12px; color: var(--color-text-muted); font-size: 12.5px; padding: 6px 14px; border-radius: var(--radius-pill); background: var(--color-surface-sunken); transition: var(--transition); }
+.add-row-btn:hover { color: var(--red); }
+
+/* 同步状态胶囊 */
+.sync-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 30px; padding: 0 14px; border-radius: var(--radius-pill);
+  background: var(--color-surface); box-shadow: var(--shadow-pill);
+  font-size: 12px; color: var(--color-text-muted);
+}
+.loader-ring { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--color-surface-sunken); border-top-color: var(--red); animation: spin .9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--color-ink); color: var(--color-text-inverse);
+  border-radius: var(--radius-pill); padding: 12px 24px; font-size: 13px;
+  opacity: 0; transition: all .35s cubic-bezier(.4,0,.2,1); z-index: 99;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 720px) {
+  .display { font-size: 30px; }
+  .topbar { padding: 0 20px; }
+  .textnav { gap: 16px; }
+}
+@media print { .ribbon, .toolbar, .topbar { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- 红色曲线装饰 -->
+<svg class="ribbon ribbon-top" viewBox="0 0 1440 160" preserveAspectRatio="none">
+  <path d="M-20,20 C200,120 400,-40 720,60 S1200,140 1460,30" stroke-width="2.5"/>
+  <path d="M-20,60 C260,150 500,0 760,80 S1180,10 1460,90" stroke-width="1.2" opacity=".6"/>
+</svg>
+<svg class="ribbon ribbon-bottom" viewBox="0 0 1440 140" preserveAspectRatio="none">
+  <path d="M-20,110 C240,20 480,150 760,70 S1220,130 1460,50" stroke-width="2"/>
+  <path d="M-20,80 C300,160 560,30 820,110 S1240,20 1460,100" stroke-width="1" opacity=".6"/>
+</svg>
+
+<div class="page">
+  <header class="topbar">
+    <div class="brand">备婚流程安排 <span class="heart-deco">❤ ❤</span></div>
+    <span class="sync-pill" id="syncPill" style="display:none"><i class="loader-ring" id="syncLoader" style="display:none"></i><span id="syncText">本地模式</span></span>
+    <nav class="textnav">
+      <button class="textnav-item is-active" data-tab="groom">男方婚礼</button>
+      <button class="textnav-item" data-tab="bride">女方答谢宴</button>
+      <button class="textnav-item" data-tab="checklist">前置准备清单</button>
+    </nav>
+  </header>
+
+  <main class="column">
+    <!-- ========== 男方婚礼 ========== -->
+    <section class="tab-panel is-active" id="tab-groom">
+      <p class="eyebrow">Wedding Ceremony · 新郎家主场</p>
+      <h1 class="display">男方婚礼<span class="accent">流程</span></h1>
+      <p class="lede">17:00 宾客签到 · 17:30 仪式开始 · 18:00 准时开席 · 无司仪，新人自主持</p>
+
+      <div class="toolbar">
+        <button class="btn btn-secondary btn-sm" onclick="addRow('groomTable')">＋ 添加环节</button>
+        <span class="spacer"></span>
+        <span class="edit-hint">点击任意单元格即可直接编辑</span>
+        <button class="btn btn-red btn-sm" onclick="exportExcel('groom')">下载 Excel</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="groomTable">
+          <thead>
+            <tr><th>时间</th><th>环节</th><th>说明</th><th>负责人（工作说明）</th><th>对应材料</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="time-cell">17:00-17:25</td><td>宾客签到、暖场</td><td>放轻快音乐，新人补妆，亲友合影</td><td class="owner-cell">伴娘/伴郎<span class="owner-desc">引导签到、递签到本、播放暖场音乐</span></td><td>签到本、签到笔、暖场歌单、合影区布置</td></tr>
+            <tr><td class="time-cell">17:25-17:30</td><td>宾客落座</td><td>双方父母主桌就座，音响、话筒、戒指确认</td><td class="owner-cell">伴郎<span class="owner-desc">引导宾客入座，检查音响话筒；戒指交新人确认</span></td><td>话筒×2、音响设备、对戒、座位表</td></tr>
+            <tr><td class="time-cell">17:30-17:32</td><td>新郎开场</td><td>欢迎来宾，说明没有司仪、仪式约30分钟（台词见备注）</td><td class="owner-cell">新郎<span class="owner-desc">手持话筒开场致辞，控制节奏</span></td><td>台词稿、话筒</td></tr>
+            <tr><td class="time-cell">17:32-17:34</td><td>新郎介绍</td><td>介绍自己、新娘、简单爱情经历，引出新娘入场</td><td class="owner-cell">新郎<span class="owner-desc">介绍结束语："有请我的新娘，有请岳父大人"</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">17:34-17:37</td><td>新娘入场、交接</td><td>女方父亲牵新娘走到交接区，新郎承诺、鞠躬/拥抱，父亲回座</td><td class="owner-cell">岳父、新郎<span class="owner-desc">岳父牵新娘入场并交接；伴郎负责此时切换入场音乐</span></td><td>入场音乐、交接区布置</td></tr>
+            <tr><td class="time-cell">17:37-17:39</td><td>新人上台</td><td>感谢父亲，新人站定（"多了一家人"台词）</td><td class="owner-cell">新郎、新娘<span class="owner-desc">共同上台，面向宾客站定</span></td><td>背景音乐（轻柔）</td></tr>
+            <tr><td class="time-cell">17:39-17:42</td><td>交换戒指</td><td>互戴戒指、说誓词，一起说"我们愿意"</td><td class="owner-cell">伴郎/伴娘<span class="owner-desc">递上戒指盒，递后退到侧台</span></td><td>对戒、戒指盒</td></tr>
+            <tr><td class="time-cell">17:42-17:45</td><td>新郎讲话</td><td>感谢父母、岳父母、亲友、新娘</td><td class="owner-cell">新郎<span class="owner-desc">控制在3分钟内，重点说"谢谢"</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">17:45-17:47</td><td>新娘讲话</td><td>感谢父母、公婆、新郎，"一起孝敬四位老人"</td><td class="owner-cell">新娘<span class="owner-desc">控制在2分钟内</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">17:47-17:52</td><td>双方父母讲话</td><td>建议各派一位代表，每人2分钟内；若四位都讲每人1分钟内</td><td class="owner-cell">双方父母<span class="owner-desc">提前沟通好代表与时长；新郎负责递话筒</span></td><td>话筒×2、父母发言稿（备用）</td></tr>
+            <tr><td class="time-cell">17:52-17:56</td><td>新人合唱</td><td>建议只唱一段+副歌，控制4分钟；可选《今天你要嫁给我》《Perfect》《最重要的决定》等</td><td class="owner-cell">新郎、新娘<span class="owner-desc">提前彩排；伴郎负责播放伴奏</span></td><td>伴奏音乐、话筒×2、歌词提示卡（备用）</td></tr>
+            <tr><td class="time-cell">17:56-18:00</td><td>致谢、开席祝酒</td><td>一起举杯，"干杯！开席！"，18:00准时开席</td><td class="owner-cell">新郎、新娘<span class="owner-desc">带领全场举杯；酒店同步开始上菜</span></td><td>香槟/酒杯、开席通知（提前告知酒店）</td></tr>
+            <tr><td class="time-cell">18:00 起</td><td>吃席、逐桌敬酒</td><td>约18:10开始逐桌敬酒</td><td class="owner-cell">新人、伴郎伴娘<span class="owner-desc">伴郎伴娘陪同敬酒、挡酒、收红包</span></td><td>敬酒服（可换装）、酒杯、红包袋</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 女方答谢宴 ========== -->
+    <section class="tab-panel" id="tab-bride">
+      <p class="eyebrow">Appreciation Banquet · 新娘家主场</p>
+      <h1 class="display">女方答谢宴<span class="accent">流程</span></h1>
+      <p class="lede">答谢宴从简：以感谢女方亲友为主，流程参考男方婚礼精简（可按实际时间整体平移）</p>
+
+      <div class="toolbar">
+        <button class="btn btn-secondary btn-sm" onclick="addRow('brideTable')">＋ 添加环节</button>
+        <span class="spacer"></span>
+        <span class="edit-hint">点击任意单元格即可直接编辑</span>
+        <button class="btn btn-red btn-sm" onclick="exportExcel('bride')">下载 Excel</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="brideTable">
+          <thead>
+            <tr><th>时间</th><th>环节</th><th>说明</th><th>负责人（工作说明）</th><th>对应材料</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="time-cell">11:00-11:25</td><td>宾客签到、暖场</td><td>放轻快音乐，亲友合影</td><td class="owner-cell">伴娘<span class="owner-desc">引导签到、播放暖场音乐</span></td><td>签到本、签到笔、暖场歌单</td></tr>
+            <tr><td class="time-cell">11:25-11:30</td><td>宾客落座</td><td>双方父母主桌就座，音响、话筒确认</td><td class="owner-cell">伴郎<span class="owner-desc">引导入座、检查设备</span></td><td>话筒×2、音响、座位表</td></tr>
+            <tr><td class="time-cell">11:30-11:33</td><td>新娘开场</td><td>欢迎女方亲友，说明仪式简短约15分钟</td><td class="owner-cell">新娘<span class="owner-desc">主持开场，语气轻松</span></td><td>台词稿、话筒</td></tr>
+            <tr><td class="time-cell">11:33-11:36</td><td>新人共同入场</td><td>新人携手入场，向宾客致意</td><td class="owner-cell">新郎、新娘<span class="owner-desc">伴郎播放入场音乐</span></td><td>入场音乐</td></tr>
+            <tr><td class="time-cell">11:36-11:39</td><td>新娘答谢讲话</td><td>感谢父母养育、感谢娘家亲友多年来的照顾</td><td class="owner-cell">新娘<span class="owner-desc">控制在3分钟内</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">11:39-11:41</td><td>新郎致谢</td><td>感谢岳父岳母信任、感谢女方亲友接纳</td><td class="owner-cell">新郎<span class="owner-desc">简短真诚，1-2分钟</span></td><td>台词稿</td></tr>
+            <tr><td class="time-cell">11:41-11:45</td><td>女方父母讲话</td><td>答谢亲友、送上对新人的祝福</td><td class="owner-cell">女方父母<span class="owner-desc">一位代表即可，2分钟内；新郎递话筒</span></td><td>话筒、发言稿（备用）</td></tr>
+            <tr><td class="time-cell">11:45-11:48</td><td>举杯祝酒、开席</td><td>新人共同举杯致谢，宣布开席</td><td class="owner-cell">新郎、新娘<span class="owner-desc">带领全场举杯；酒店同步上菜</span></td><td>酒杯、开席通知</td></tr>
+            <tr><td class="time-cell">11:48 起</td><td>吃席、逐桌敬酒</td><td>约12:00开始逐桌敬酒答谢</td><td class="owner-cell">新人、伴娘<span class="owner-desc">伴娘陪同敬酒、收红包</span></td><td>敬酒服（可换装）、酒杯、红包袋</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 前置准备清单 ========== -->
+    <section class="tab-panel" id="tab-checklist">
+      <p class="eyebrow">Preparation Checklist · 按人分类</p>
+      <h1 class="display">前置准备<span class="accent">清单</span></h1>
+      <p class="lede">勾选"已备好"自动划线标记；来源可填淘宝店名或购买渠道示例</p>
+
+      <div class="toolbar">
+        <span class="edit-hint">点击任意单元格即可直接编辑 · 勾选"已备好"会划线标记</span>
+        <span class="spacer"></span>
+        <button class="btn btn-red btn-sm" onclick="exportExcel('checklist')">下载 Excel</button>
+      </div>
+
+      <!-- 清单由 JS 渲染 -->
+      <div id="checklistRoot"></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script>
+/* ============ Tab 切换 ============ */
+document.querySelectorAll('.textnav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.textnav-item').forEach(b => b.classList.remove('is-active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('is-active');
+  });
+});
+
+/* ============ 可编辑：所有 td 开启 contenteditable ============ */
+document.querySelectorAll('#groomTable td, #brideTable td').forEach(td => {
+  td.setAttribute('contenteditable', 'true');
+});
+
+/* ============ 添加行 ============ */
+function addRow(tableId) {
+  const tbody = document.getElementById(tableId).querySelector('tbody');
+  const cols = tbody.closest('table').querySelectorAll('thead th').length;
+  const tr = document.createElement('tr');
+  for (let i = 0; i < cols; i++) {
+    const td = document.createElement('td');
+    td.setAttribute('contenteditable', 'true');
+    td.textContent = '—';
+    tr.appendChild(td);
+  }
+  tbody.appendChild(tr);
+  toast('已添加一行，可直接编辑');
+}
+
+/* ============ 前置准备清单数据 ============ */
+let checklistData = [
+  { cat: '新郎', subs: [
+    { name: '服饰类', items: [
+      ['西装套装（含衬衫、领带/领结）', '1套', false, '淘宝：GXG/报喜鸟 旗舰店'],
+      ['皮鞋', '1双', false, '淘宝：Clarks/红蜻蜓'],
+      ['皮带、袖扣、口袋巾', '各1', false, '淘宝：西装配件店'],
+      ['敬酒便装（可选）', '1套', false, '自备休闲西装即可'],
+    ]},
+    { name: '小物件', items: [
+      ['男士对戒', '1枚', false, '线下金店/淘宝：周大福旗舰店'],
+      ['伴郎红包（给伴郎伴娘）', '4-6个', false, '淘宝：喜字红包店'],
+      ['堵门红包（小面额）', '30-50个', false, '淘宝：婚庆红包批发'],
+      ['誓词卡/台词手卡', '2张', false, '自制打印'],
+      ['剃须刀/香水/应急补妆', '1套', false, '自备'],
+    ]},
+  ]},
+  { cat: '新娘', subs: [
+    { name: '服饰类', items: [
+      ['主婚纱', '1件', false, '婚纱租赁店/淘宝：满庭芳婚纱'],
+      ['敬酒服（旗袍/礼服）', '1件', false, '淘宝：旗袍定制店'],
+      ['婚鞋（仪式+敬酒两双）', '2双', false, '淘宝：73Hours/百丽'],
+      ['头纱、头饰、耳环项链', '各1', false, '淘宝：新娘饰品店'],
+      ['晨袍（化妆拍照用）', '1件', false, '淘宝：真丝晨袍店'],
+      ['答谢宴礼服（可与敬酒服同）', '1件', false, '同上'],
+    ]},
+    { name: '小物件', items: [
+      ['女士对戒', '1枚', false, '线下金店/淘宝：周大福旗舰店'],
+      ['手捧花', '1束', false, '本地花店预订'],
+      ['胸贴/打底裤/塑身衣', '各1', false, '淘宝：Ubras/蕉内'],
+      ['应急包（别针、针线、创可贴、吸管）', '1套', false, '淘宝：婚礼应急包'],
+      ['誓词卡/台词手卡', '2张', false, '自制打印'],
+    ]},
+  ]},
+  { cat: '双方父母', subs: [
+    { name: '服饰类', items: [
+      ['父亲西装/中山装', '2套', false, '淘宝：雅戈尔/报喜鸟'],
+      ['母亲旗袍/礼服', '2套', false, '淘宝：妈妈装礼服店'],
+      ['父母皮鞋/配饰', '各2', false, '线下商场'],
+    ]},
+    { name: '物件', items: [
+      ['父母发言稿（备用）', '2份', false, '新人代写打印'],
+      ['父母胸花', '4个', false, '婚庆花艺店/淘宝'],
+      ['给新人的红包/礼物', '自定', false, '自备'],
+    ]},
+  ]},
+  { cat: '婚礼物件', subs: [
+    { name: '仪式物料', items: [
+      ['签到本+签到笔', '1套', false, '淘宝：婚礼签到用品店'],
+      ['合影区布置（背景板/气球）', '1套', false, '婚庆公司/淘宝：婚房布置店'],
+      ['话筒×2、音响确认', '1套', false, '酒店提供，提前确认'],
+      ['戒指盒', '1个', false, '淘宝：戒指盒定制'],
+      ['香槟/祝酒酒杯', '2-4只', false, '酒店提供或淘宝'],
+    ]},
+    { name: '宴会物料', items: [
+      ['喜糖、喜烟、喜酒', '按桌数×10%', false, '线下批发市场/京东'],
+      ['红包袋（敬酒收礼用）', '若干', false, '淘宝：婚庆红包批发'],
+      ['桌卡/座位表', '按桌数', false, '淘宝：桌卡定制打印'],
+      ['暖场+入场+伴奏音乐', '1套歌单', false, '自建歌单，存U盘+手机双备份'],
+      ['台词/流程手卡（全套打印）', '3份', false, '自制打印（新人+伴郎各一份）'],
+    ]},
+  ]},
+];
+
+/* ============ 渲染清单 ============ */
+function renderChecklist() {
+  const root = document.getElementById('checklistRoot');
+  root.innerHTML = '';
+  checklistData.forEach((cat, ci) => {
+    const sec = document.createElement('div');
+    sec.className = 'check-section';
+    const total = cat.subs.reduce((n, s) => n + s.items.length, 0);
+    const done = cat.subs.reduce((n, s) => n + s.items.filter(i => i[2]).length, 0);
+    sec.innerHTML = `<div class="cat-head"><h2>${cat.cat}</h2><span class="count" data-cat="${ci}">${done}/${total} 已备好</span></div>`;
+    cat.subs.forEach(sub => {
+      const subEl = document.createElement('p');
+      subEl.className = 'sub-cat';
+      subEl.textContent = sub.name;
+      sec.appendChild(subEl);
+      const wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      const table = document.createElement('table');
+      table.className = 'check-table';
+      table.innerHTML = `<thead><tr><th>物品</th><th>数量</th><th>已备好</th><th>来源（淘宝店名/示例）</th></tr></thead>`;
+      const tbody = document.createElement('tbody');
+      sub.items.forEach(item => {
+        const tr = document.createElement('tr');
+        if (item[2]) tr.className = 'is-done';
+        tr.innerHTML = `
+          <td contenteditable="true">${item[0]}</td>
+          <td contenteditable="true" style="white-space:nowrap">${item[1]}</td>
+          <td><label class="done-check"><input type="checkbox" ${item[2] ? 'checked' : ''}>备好</label></td>
+          <td contenteditable="true">${item[3]}</td>`;
+        tr.querySelector('input').addEventListener('change', e => {
+          item[2] = e.target.checked;
+          tr.classList.toggle('is-done', item[2]);
+          updateCount(sec, cat, ci);
+        });
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      wrap.appendChild(table);
+      sec.appendChild(wrap);
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-row-btn';
+      addBtn.textContent = '＋ 添加一项';
+      addBtn.onclick = () => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td contenteditable="true">新物品</td><td contenteditable="true">1</td>
+          <td><label class="done-check"><input type="checkbox">备好</label></td>
+          <td contenteditable="true">—</td>`;
+        const idx = sub.items.length;
+        sub.items.push(['新物品', '1', false, '—']);
+        tr.querySelector('input').addEventListener('change', e => {
+          sub.items[idx][2] = e.target.checked;
+          tr.classList.toggle('is-done', e.target.checked);
+          updateCount(sec, cat, ci);
+        });
+        tbody.appendChild(tr);
+        updateCount(sec, cat, ci);
+        schedulePush();
+      };
+      sec.appendChild(addBtn);
+    });
+    root.appendChild(sec);
+  });
+}
+function updateCount(sec, cat, ci) {
+  const total = cat.subs.reduce((n, s) => n + s.items.length, 0);
+  const done = cat.subs.reduce((n, s) => n + s.items.filter(i => i[2]).length, 0);
+  sec.querySelector(`[data-cat="${ci}"]`).textContent = `${done}/${total} 已备好`;
+}
+renderChecklist();
+
+/* ============ 导出 Excel ============ */
+function tableToAOA(table) {
+  const rows = [];
+  table.querySelectorAll('tr').forEach(tr => {
+    const row = [];
+    tr.querySelectorAll('th, td').forEach(cell => {
+      if (cell.querySelector('input[type=checkbox]')) {
+        row.push(cell.querySelector('input').checked ? '已备好' : '未备好');
+      } else {
+        row.push(cell.innerText.replace(/\n/g, ' ').trim());
+      }
+    });
+    rows.push(row);
+  });
+  return rows;
+}
+
+function exportExcel(which) {
+  if (typeof XLSX === 'undefined') { toast('Excel 组件加载失败，请联网后刷新重试'); return; }
+  const wb = XLSX.utils.book_new();
+
+  if (which === 'groom' || which === 'all') {
+    const ws = XLSX.utils.aoa_to_sheet(tableToAOA(document.getElementById('groomTable')));
+    ws['!cols'] = [{wch:13},{wch:16},{wch:46},{wch:34},{wch:30}];
+    XLSX.utils.book_append_sheet(wb, ws, '男方婚礼流程');
+  }
+  if (which === 'bride' || which === 'all') {
+    const ws = XLSX.utils.aoa_to_sheet(tableToAOA(document.getElementById('brideTable')));
+    ws['!cols'] = [{wch:13},{wch:16},{wch:46},{wch:34},{wch:30}];
+    XLSX.utils.book_append_sheet(wb, ws, '女方答谢宴流程');
+  }
+  if (which === 'checklist' || which === 'all') {
+    document.querySelectorAll('#checklistRoot .check-section').forEach(sec => {
+      const catName = sec.querySelector('h2').textContent;
+      const aoa = [];
+      sec.querySelectorAll('.sub-cat').forEach(subEl => {
+        aoa.push([`【${subEl.textContent}】`]);
+        const table = subEl.nextElementSibling.querySelector('table');
+        tableToAOA(table).forEach(r => aoa.push(r));
+        aoa.push([]);
+      });
+      const ws = XLSX.utils.aoa_to_sheet(aoa);
+      ws['!cols'] = [{wch:34},{wch:10},{wch:10},{wch:34}];
+      XLSX.utils.book_append_sheet(wb, ws, '清单-' + catName);
+    });
+  }
+
+  const names = { groom: '男方婚礼流程', bride: '女方答谢宴流程', checklist: '前置准备清单' };
+  XLSX.writeFile(wb, `备婚-${names[which] || '全部'}.xlsx`);
+  toast('Excel 已开始下载 ❤');
+}
+
+/* ============ 状态序列化 / 应用 ============ */
+function readFlowTable(tableId) {
+  const rows = [];
+  document.querySelectorAll('#' + tableId + ' tbody tr').forEach(tr => {
+    const row = [];
+    tr.querySelectorAll('td').forEach(td => {
+      const desc = td.querySelector('.owner-desc');
+      if (desc) {
+        const name = td.childNodes[0] ? td.childNodes[0].textContent.trim() : td.innerText.trim();
+        row.push(name + '（' + desc.innerText.replace(/\n/g, ' ').trim() + '）');
+      } else {
+        row.push(td.innerText.replace(/\n/g, ' ').trim());
+      }
+    });
+    rows.push(row);
+  });
+  return rows;
+}
+function readChecklistFromDOM() {
+  const data = [];
+  document.querySelectorAll('#checklistRoot .check-section').forEach(sec => {
+    const cat = { cat: sec.querySelector('h2').textContent, subs: [] };
+    sec.querySelectorAll('.sub-cat').forEach(subEl => {
+      const sub = { name: subEl.textContent, items: [] };
+      subEl.nextElementSibling.querySelectorAll('tbody tr').forEach(tr => {
+        const tds = tr.querySelectorAll('td');
+        sub.items.push([
+          tds[0].innerText.replace(/\n/g, ' ').trim(),
+          tds[1].innerText.replace(/\n/g, ' ').trim(),
+          tr.querySelector('input[type=checkbox]').checked,
+          tds[3].innerText.replace(/\n/g, ' ').trim(),
+        ]);
+      });
+      cat.subs.push(sub);
+    });
+    data.push(cat);
+  });
+  return data;
+}
+function serializeState() {
+  return {
+    groom: readFlowTable('groomTable'),
+    bride: readFlowTable('brideTable'),
+    checklist: readChecklistFromDOM(),
+  };
+}
+function fillFlowTable(tableId, rows) {
+  const tbody = document.getElementById(tableId).querySelector('tbody');
+  tbody.innerHTML = '';
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+    row.forEach((cell, i) => {
+      const td = document.createElement('td');
+      td.setAttribute('contenteditable', 'true');
+      if (i === 0) td.className = 'time-cell';
+      if (i === 3) td.className = 'owner-cell';
+      // 负责人列：把 "名字（说明）" 拆回两行小字样式
+      if (i === 3 && cell.includes('（')) {
+        const idx = cell.indexOf('（');
+        td.innerHTML = escapeHtml(cell.slice(0, idx)) +
+          '<span class="owner-desc">' + escapeHtml(cell.slice(idx + 1).replace(/）$/, '')) + '</span>';
+      } else {
+        td.textContent = cell;
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+}
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function applyState(data) {
+  if (Array.isArray(data.groom)) fillFlowTable('groomTable', data.groom);
+  if (Array.isArray(data.bride)) fillFlowTable('brideTable', data.bride);
+  if (Array.isArray(data.checklist)) { checklistData = data.checklist; renderChecklist(); }
+}
+
+/* ============ 在线协同（JSONBin 轮询同步） ============ */
+const SYNC = {
+  binId: '6ab8fec3ffd5d16053343993', // JSONBin Bin ID（wedding-plan）
+  apiKey: '$2a$10$DcBbkPxVnCieGBz9tsjhSO1ftj6UmCjFPHAGdXhPV2wT2NrORbwSm', // JSONBin X-Access-Key（仅可读写 wedding-plan）
+  interval: 5000, // 轮询间隔（毫秒）
+};
+const clientId = Math.random().toString(36).slice(2);
+let lastSyncedAt = 0;      // 已应用/已上传的最新版本时间戳
+let saveTimer = null;
+let syncing = false;
+
+function syncEnabled() { return !!(SYNC.binId && SYNC.apiKey); }
+
+function setSyncStatus(text, loading) {
+  const pill = document.getElementById('syncPill');
+  pill.style.display = 'inline-flex';
+  document.getElementById('syncText').textContent = text;
+  document.getElementById('syncLoader').style.display = loading ? 'block' : 'none';
+}
+
+async function pushState() {
+  if (!syncEnabled() || syncing) return;
+  syncing = true;
+  setSyncStatus('同步中…', true);
+  try {
+    const payload = { updatedAt: Date.now(), by: clientId, data: serializeState() };
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${SYNC.binId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Access-Key': SYNC.apiKey },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(res.status);
+    lastSyncedAt = payload.updatedAt;
+    setSyncStatus('已同步 · ' + new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }), false);
+  } catch (e) {
+    setSyncStatus('同步失败，稍候重试', false);
+  } finally { syncing = false; }
+}
+
+function schedulePush() {
+  if (!syncEnabled()) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(pushState, 2000); // 停止编辑 2 秒后上传
+}
+
+async function pullState() {
+  if (!syncEnabled() || syncing) return;
+  // 用户正在编辑单元格时，暂不覆盖页面
+  const ae = document.activeElement;
+  if (ae && ae.getAttribute && ae.getAttribute('contenteditable') === 'true') return;
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${SYNC.binId}/latest`, {
+      headers: { 'X-Access-Key': SYNC.apiKey },
+    });
+    if (!res.ok) throw new Error(res.status);
+    const json = await res.json();
+    const rec = json.record;
+    if (rec && rec.updatedAt > lastSyncedAt && rec.by !== clientId) {
+      lastSyncedAt = rec.updatedAt;
+      applyState(rec.data);
+      setSyncStatus('已更新 · ' + new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }), false);
+    }
+  } catch (e) { /* 静默，下一轮再试 */ }
+}
+
+function initSync() {
+  if (!syncEnabled()) return;
+  setSyncStatus('连接中…', true);
+  fetch(`https://api.jsonbin.io/v3/b/${SYNC.binId}/latest`, { headers: { 'X-Access-Key': SYNC.apiKey } })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(json => {
+      if (json.record && json.record.data) {
+        lastSyncedAt = json.record.updatedAt || Date.now();
+        applyState(json.record.data);
+      }
+      setSyncStatus('协同已连接', false);
+    })
+    .catch(() => setSyncStatus('协同连接失败（仍可本地编辑）', false));
+  setInterval(pullState, SYNC.interval);
+}
+
+/* 任意编辑（输入/勾选/加行）都触发自动保存 */
+document.addEventListener('input', e => {
+  if (e.target.closest && e.target.closest('td')) schedulePush();
+});
+document.addEventListener('change', e => {
+  if (e.target.matches && e.target.matches('input[type=checkbox]')) schedulePush();
+});
+const _addRow = addRow;
+addRow = function (tableId) { _addRow(tableId); schedulePush(); };
+
+initSync();
+
+/* ============ Toast ============ */
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+</script>
+</body>
+</html>
