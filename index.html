@@ -474,15 +474,34 @@ tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
         <div class="table-wrap">
           <table id="venueTable">
             <thead>
-              <tr><th>场次</th><th>场地名称</th><th>地址</th><th>现场风格类型</th><th>已定好</th></tr>
+              <tr><th>场次</th><th>日期</th><th>场地名称</th><th>地址</th><th>现场风格类型</th><th>现场布置准备</th><th>已定好</th></tr>
             </thead>
             <tbody>
-              <tr><td contenteditable="true">男方婚礼场地</td><td contenteditable="true">（待填，如：XX酒店宴会厅）</td><td contenteditable="true">（待填详细地址）</td><td contenteditable="true">（如：中式红金 / 西式简约 / 户外草坪 / 酒店宴会厅）</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
-              <tr><td contenteditable="true">女方答谢宴场地</td><td contenteditable="true">（待填，如：XX酒楼）</td><td contenteditable="true">（待填详细地址）</td><td contenteditable="true">（如：中式红金 / 西式简约 / 户外草坪 / 酒店宴会厅）</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+              <tr><td contenteditable="true">男方婚礼场地</td><td contenteditable="true">（待填日期）</td><td contenteditable="true">（待填，如：XX酒店宴会厅）</td><td contenteditable="true">（待填详细地址）</td><td contenteditable="true">（如：中式红金 / 西式简约 / 户外草坪 / 酒店宴会厅）</td><td contenteditable="true">（如：迎宾区、主舞台、桌花、灯光、大屏）</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+              <tr><td contenteditable="true">女方答谢宴场地</td><td contenteditable="true">（待填日期）</td><td contenteditable="true">（待填，如：XX酒楼）</td><td contenteditable="true">（待填详细地址）</td><td contenteditable="true">（如：中式红金 / 西式简约 / 户外草坪 / 酒店宴会厅）</td><td contenteditable="true">（如：迎宾区、主背景、桌花、音响）</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
             </tbody>
           </table>
         </div>
         <button class="add-row-btn" onclick="addVenueRow()">＋ 添加场地</button>
+      </div>
+
+      <!-- 婚礼工作人员独立模块 -->
+      <div class="check-section">
+        <div class="cat-head"><h2>婚礼工作人员</h2><span class="count">提前确认人员、档期和当天分工</span></div>
+        <div class="table-wrap">
+          <table id="staffTable">
+            <thead>
+              <tr><th>岗位</th><th>工作说明</th><th>人数</th><th>已确定</th></tr>
+            </thead>
+            <tbody>
+              <tr><td contenteditable="true">跟拍摄影师</td><td contenteditable="true">全程跟拍，记录仪式、合影与敬酒</td><td contenteditable="true">1人</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+              <tr><td contenteditable="true">化妆师</td><td contenteditable="true">新人妆发、仪式前补妆与换装协助</td><td contenteditable="true">1人</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+              <tr><td contenteditable="true">现场灯光师</td><td contenteditable="true">负责现场灯光、追光与合影灯调试</td><td contenteditable="true">1人</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+              <tr><td contenteditable="true">婚礼管家（随身助理）</td><td contenteditable="true">跟随新人，帮忙拿东西、递物品、处理临时需求</td><td contenteditable="true">1人</td><td><label class="done-check"><input type="checkbox">已定</label></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="add-row-btn" onclick="addStaffRow()">＋ 添加工作人员</button>
       </div>
 
       <!-- 清单由 JS 渲染 -->
@@ -535,7 +554,7 @@ function attachScriptDel(block) {
   }));
 }
 /* 初始化：给现有行和台词块挂删除按钮 */
-document.querySelectorAll('#groomTable tbody tr, #brideTable tbody tr, #venueTable tbody tr').forEach(attachRowDel);
+document.querySelectorAll('#groomTable tbody tr, #brideTable tbody tr, #venueTable tbody tr, #staffTable tbody tr').forEach(attachRowDel);
 document.querySelectorAll('#groomScripts .script-block').forEach(attachScriptDel);
 
 /* ============ 添加行 ============ */
@@ -557,7 +576,17 @@ function addRow(tableId) {
 function addVenueRow() {
   const tbody = document.getElementById('venueTable').querySelector('tbody');
   const tr = document.createElement('tr');
-  tr.innerHTML = `<td contenteditable="true">新场地</td><td contenteditable="true">（待填）</td><td contenteditable="true">（待填）</td><td contenteditable="true">（待填）</td><td><label class="done-check"><input type="checkbox">已定</label></td>`;
+  tr.innerHTML = `<td contenteditable="true">新场地</td><td contenteditable="true">（待填日期）</td><td contenteditable="true">（待填场地名称）</td><td contenteditable="true">（待填地址）</td><td contenteditable="true">（待填风格）</td><td contenteditable="true">（待填布置准备）</td><td><label class="done-check"><input type="checkbox">已定</label></td>`;
+  attachRowDel(tr);
+  tbody.appendChild(tr);
+  schedulePush();
+  toast('已添加一行，可直接编辑');
+}
+
+function addStaffRow() {
+  const tbody = document.getElementById('staffTable').querySelector('tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td contenteditable="true">新岗位</td><td contenteditable="true">（待填工作说明）</td><td contenteditable="true">1人</td><td><label class="done-check"><input type="checkbox">已定</label></td>`;
   attachRowDel(tr);
   tbody.appendChild(tr);
   schedulePush();
@@ -750,11 +779,16 @@ function exportExcel(which) {
     XLSX.utils.book_append_sheet(wb, ws, '女方答谢宴流程');
   }
   if (which === 'checklist' || which === 'all') {
-    const venueAoa = [['场次', '场地名称', '地址', '现场风格类型', '已定好']];
-    readVenueTable().forEach(r => venueAoa.push([r[0], r[1], r[2], r[3], r[4] ? '已定' : '未定']));
+    const venueAoa = [['场次', '日期', '场地名称', '地址', '现场风格类型', '现场布置准备', '已定好']];
+    readVenueTable().forEach(r => venueAoa.push([r[0], r[1], r[2], r[3], r[4], r[5], r[6] ? '已定' : '未定']));
     const vws = XLSX.utils.aoa_to_sheet(venueAoa);
-    vws['!cols'] = [{wch:16},{wch:26},{wch:36},{wch:30},{wch:8}];
+    vws['!cols'] = [{wch:16},{wch:14},{wch:26},{wch:36},{wch:30},{wch:36},{wch:8}];
     XLSX.utils.book_append_sheet(wb, vws, '婚礼场地');
+    const staffAoa = [['岗位', '工作说明', '人数', '已确定']];
+    readStaffTable().forEach(r => staffAoa.push([r[0], r[1], r[2], r[3] ? '已定' : '未定']));
+    const staffWs = XLSX.utils.aoa_to_sheet(staffAoa);
+    staffWs['!cols'] = [{wch:24},{wch:48},{wch:10},{wch:10}];
+    XLSX.utils.book_append_sheet(wb, staffWs, '婚礼工作人员');
     document.querySelectorAll('#checklistRoot .check-section').forEach(sec => {
       const catName = sec.querySelector('h2').textContent;
       const aoa = [];
@@ -819,38 +853,50 @@ function readChecklistFromDOM() {
   });
   return data;
 }
-function readVenueTable() {
+function readStatusTable(tableId, textCols) {
   const rows = [];
-  document.querySelectorAll('#venueTable tbody tr').forEach(tr => {
+  document.querySelectorAll('#' + tableId + ' tbody tr').forEach(tr => {
     const tds = tr.querySelectorAll('td:not(.del-cell)');
-    rows.push([
-      tds[0].innerText.replace(/\n/g, ' ').trim(),
-      tds[1].innerText.replace(/\n/g, ' ').trim(),
-      tds[2].innerText.replace(/\n/g, ' ').trim(),
-      tds[3].innerText.replace(/\n/g, ' ').trim(),
-      tr.querySelector('input[type=checkbox]').checked,
-    ]);
+    const row = [];
+    for (let i = 0; i < textCols; i++) {
+      row.push(tds[i].innerText.replace(/\n/g, ' ').trim());
+    }
+    row.push(tr.querySelector('input[type=checkbox]').checked);
+    rows.push(row);
   });
   return rows;
 }
-function fillVenueTable(rows) {
-  const tbody = document.getElementById('venueTable').querySelector('tbody');
+function fillStatusTable(tableId, rows, textCols) {
+  const tbody = document.getElementById(tableId).querySelector('tbody');
   tbody.innerHTML = '';
   rows.forEach(row => {
     const tr = document.createElement('tr');
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < textCols; i++) {
       const td = document.createElement('td');
       td.setAttribute('contenteditable', 'true');
-      td.textContent = row[i];
+      td.textContent = row[i] || '';
       tr.appendChild(td);
     }
     const td = document.createElement('td');
-    td.innerHTML = `<label class="done-check"><input type="checkbox" ${row[4] ? 'checked' : ''}>已定</label>`;
+    td.innerHTML = `<label class="done-check"><input type="checkbox" ${row[textCols] ? 'checked' : ''}>已定</label>`;
     tr.appendChild(td);
     attachRowDel(tr);
     tbody.appendChild(tr);
   });
 }
+function normalizeVenueRow(row) {
+  // 兼容旧版五列数据：场次、场地名称、地址、现场风格类型、是否已定
+  if (row.length === 5 && typeof row[4] === 'boolean') {
+    return [row[0], '（待填日期）', row[1], row[2], row[3], '（待填布置准备）', row[4]];
+  }
+  return row;
+}
+function readVenueTable() { return readStatusTable('venueTable', 6); }
+function fillVenueTable(rows) {
+  fillStatusTable('venueTable', rows.map(normalizeVenueRow), 6);
+}
+function readStaffTable() { return readStatusTable('staffTable', 3); }
+function fillStaffTable(rows) { fillStatusTable('staffTable', rows, 3); }
 function readScripts() {
   const rows = [];
   document.querySelectorAll('#groomScripts .script-block').forEach(b => {
@@ -882,6 +928,7 @@ function serializeState() {
     groom: readFlowTable('groomTable'),
     bride: readFlowTable('brideTable'),
     venue: readVenueTable(),
+    staff: readStaffTable(),
     checklist: readChecklistFromDOM(),
     scripts: readScripts(),
   };
@@ -916,6 +963,7 @@ function applyState(data) {
   if (Array.isArray(data.groom)) fillFlowTable('groomTable', data.groom);
   if (Array.isArray(data.bride)) fillFlowTable('brideTable', data.bride);
   if (Array.isArray(data.venue)) fillVenueTable(data.venue);
+  if (Array.isArray(data.staff)) fillStaffTable(data.staff);
   if (Array.isArray(data.checklist)) { checklistData = data.checklist; renderChecklist(); }
   if (Array.isArray(data.scripts)) fillScripts(data.scripts);
 }
