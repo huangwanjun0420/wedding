@@ -640,14 +640,12 @@ let checklistData = [
     ]},
   ]},
   { cat: '婚礼物件', subs: [
-    { name: '仪式物料', items: [
+    { name: '仪式与宴会物料', items: [
       ['签到本+签到笔', '1套', false, '淘宝：婚礼签到用品店'],
       ['合影区布置（背景板/气球）', '1套', false, '婚庆公司/淘宝：婚房布置店'],
       ['话筒×2、音响确认', '1套', false, '酒店提供，提前确认'],
       ['戒指盒', '1个', false, '淘宝：戒指盒定制'],
       ['香槟/祝酒酒杯', '2-4只', false, '酒店提供或淘宝'],
-    ]},
-    { name: '宴会物料', items: [
       ['喜糖、喜烟、喜酒', '按桌数×10%', false, '线下批发市场/京东'],
       ['红包袋（敬酒收礼用）', '若干', false, '淘宝：婚庆红包批发'],
       ['桌卡/座位表', '按桌数', false, '淘宝：桌卡定制打印'],
@@ -959,12 +957,28 @@ function fillFlowTable(tableId, rows) {
 function escapeHtml(s) {
   return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+function normalizeChecklistData(data) {
+  data.forEach(cat => {
+    if (cat.cat !== '婚礼物件' || !Array.isArray(cat.subs)) return;
+    const merged = { name: '仪式与宴会物料', items: [] };
+    const others = [];
+    cat.subs.forEach(sub => {
+      if (['仪式物料', '宴会物料', '仪式与宴会物料'].includes(sub.name)) {
+        merged.items.push(...sub.items);
+      } else {
+        others.push(sub);
+      }
+    });
+    if (merged.items.length) cat.subs = [merged, ...others];
+  });
+  return data;
+}
 function applyState(data) {
   if (Array.isArray(data.groom)) fillFlowTable('groomTable', data.groom);
   if (Array.isArray(data.bride)) fillFlowTable('brideTable', data.bride);
   if (Array.isArray(data.venue)) fillVenueTable(data.venue);
   if (Array.isArray(data.staff)) fillStaffTable(data.staff);
-  if (Array.isArray(data.checklist)) { checklistData = data.checklist; renderChecklist(); }
+  if (Array.isArray(data.checklist)) { checklistData = normalizeChecklistData(data.checklist); renderChecklist(); }
   if (Array.isArray(data.scripts)) fillScripts(data.scripts);
 }
 
