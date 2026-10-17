@@ -205,7 +205,7 @@ tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
     <section class="tab-panel is-active" id="tab-groom">
       <p class="eyebrow">Wedding Ceremony · 新郎家主场</p>
       <h1 class="display">男方婚礼<span class="accent">流程</span></h1>
-      <p class="lede">16:20 新人迎客 · 17:00 仪式开始 · 17:30 开席 · 20:10 结束 · 无司仪，新人自主持</p>
+      <p class="lede">前一晚女方及女方父母入住温州酒店 · 中午酒店敬茶改口 · 16:20 迎客 · 17:00 仪式 · 17:30 开席 · 20:10 结束</p>
 
       <div class="toolbar">
         <button class="btn btn-secondary btn-sm" onclick="addRow('groomTable')">＋ 添加环节</button>
@@ -220,6 +220,8 @@ tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
             <tr><th>时间</th><th>环节</th><th>说明</th><th>负责人（工作说明）</th><th>对应材料</th></tr>
           </thead>
           <tbody>
+            <tr><td class="time-cell">婚礼前一晚</td><td>女方及女方父母入住温州酒店</td><td>新娘和女方父母提前一晚入住温州酒店，便于第二天中午敬茶及婚礼当天安排</td><td class="owner-cell">新娘、女方父母<span class="owner-desc">办理入住</span>；新郎<span class="owner-desc">提前确认房间、交通和入住时间</span></td><td>温州酒店预订、身份证、住宿行李</td></tr>
+            <tr><td class="time-cell">婚礼当天中午</td><td>敬茶改口（酒店）</td><td>改口茶提前至中午在酒店进行；双方父母就座，先给男方父母敬茶，再给女方父母敬茶，每对约5-7分钟</td><td class="owner-cell">新郎、新娘<span class="owner-desc">中午在酒店敬茶</span>；婚礼管家<span class="owner-desc">提前备好茶具、红包、跪垫</span></td><td>茶具、跪垫、父母红包</td></tr>
             <tr><td class="time-cell">16:20-16:35</td><td>宾客到来、暖场</td><td>16:20新人迎客；轻快音乐；父母入座；大屏幕循环播放新人视频/婚纱照</td><td class="owner-cell">新郎、新娘<span class="owner-desc">门口迎客</span>；好友甲<span class="owner-desc">播放暖场音乐与大屏视频</span></td><td>暖场歌单、新人视频/婚纱照（U盘+电脑双备份）、大屏</td></tr>
             <tr><td class="time-cell">16:35-16:50</td><td>亲朋好友合影</td><td>分批合影：男方亲戚、女方亲戚、好友、同学同事；大屏继续循环播放视频，音量调低</td><td class="owner-cell">好友甲<span class="owner-desc">组织分批合影顺序、控制大屏音量</span></td><td>合影区、大屏视频</td></tr>
             <tr><td class="time-cell">16:50-17:00</td><td>新郎最后确认</td><td>逐项确认：话筒2支及电池、戒指盒交甲乙、音乐伴奏试放、手卡、甲乙就位、大屏切换仪式背景、灯光、与酒店确认17:30上菜18:30菜齐</td><td class="owner-cell">新郎<span class="owner-desc">拿确认清单逐项打勾</span></td><td>确认清单、话筒×2+备用电池、戒指盒、手卡（新郎/新娘/父母发言稿）</td></tr>
@@ -237,7 +239,6 @@ tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
             <tr><td class="time-cell">18:30-18:55</td><td>逐桌敬酒</td><td>15桌集体敬酒，每桌约1.5分钟；顺序：主桌→女方长辈→男方长辈→好友→其他亲友；普通桌只集体举杯，长辈桌多寒暄30秒</td><td class="owner-cell">新人<span class="owner-desc">双方父母引荐</span>；好友甲、闺蜜乙<span class="owner-desc">跟在旁边拿酒瓶、及时倒酒</span></td><td>敬酒服（可换装）、酒瓶酒杯、红包袋</td></tr>
             <tr><td class="time-cell">18:55-19:00</td><td>酒席收尾</td><td>新人回主桌，准备送客；19:00酒席结束，宾客陆续离场</td><td class="owner-cell">新郎、新娘<span class="owner-desc">回到主桌，整理随身物品</span></td><td>—</td></tr>
             <tr><td class="time-cell">19:00-19:20</td><td>送宾客好友</td><td>门口送客；父母送长辈，新人送好友；普通宾客点头致意即可，控制20分钟</td><td class="owner-cell">新人、双方父母<span class="owner-desc">分工送客</span></td><td>—</td></tr>
-            <tr><td class="time-cell">19:20-19:35</td><td>敬茶改口</td><td>双方父母就座；先给男方父母敬茶，再给女方父母敬茶，每对约5-7分钟；父母给红包</td><td class="owner-cell">新郎、新娘<span class="owner-desc">好友甲、闺蜜乙提前备好茶具跪垫</span></td><td>茶具、跪垫、父母红包</td></tr>
             <tr><td class="time-cell">19:35-19:55</td><td>男方亲戚给新娘发红包</td><td>亲戚依次上前（2-3人一组，每组1-1.5分钟），红包+祝福；托盘收纳，专人记录保管</td><td class="owner-cell">男方亲戚<span class="owner-desc">专人负责记录和保管红包</span></td><td>托盘/收纳袋、记录纸笔</td></tr>
             <tr><td class="time-cell">19:55-20:10</td><td>收尾合影</td><td>与双方父母、亲戚、好友合影；收拾物品；感谢帮忙亲友</td><td class="owner-cell">新人、亲友<span class="owner-desc">摄影师/好友甲组织合影</span></td><td>相机、物品清单</td></tr>
             <tr><td class="time-cell">20:10</td><td>结束</td><td>感谢帮忙亲友，收尾</td><td class="owner-cell">新郎、新娘</td><td>—</td></tr>
@@ -247,6 +248,20 @@ tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
 
       <h2 class="headline">详细流程与台词模板<span class="sub">点击即可编辑 · 改动自动同步</span></h2>
       <div id="groomScripts">
+        <div class="script-block">
+          <h3 class="script-title" contenteditable="true">婚礼当天中午 敬茶改口（酒店）</h3>
+          <div class="script-body" contenteditable="true">改口茶提前至婚礼当天中午，在酒店进行。双方父母就座，提前准备茶具、红包、跪垫。
+
+流程：
+1. 新人先给男方父母敬茶。
+2. 再给女方父母敬茶。
+3. 每对父母约5-7分钟。
+
+台词参考——
+新郎/新娘端茶：“爸、妈，请喝茶。”
+父母喝一口，给红包：“好，以后就是一家人了，好好过日子。”
+新人鞠躬：“谢谢爸、妈。”</div>
+        </div>
         <div class="script-block">
           <h3 class="script-title" contenteditable="true">16:20-16:35 新人迎客、宾客到来、暖场</h3>
           <div class="script-body" contenteditable="true">- 16:20开始迎客。
@@ -386,20 +401,6 @@ tr:hover .row-del, .script-block:hover .row-del { opacity: 1; }
 - 父母送长辈，新人送好友。
 - 普通宾客点头致意即可。
 - 控制20分钟。</div>
-        </div>
-        <div class="script-block">
-          <h3 class="script-title" contenteditable="true">19:20-19:35 敬茶改口</h3>
-          <div class="script-body" contenteditable="true">送客后，请双方父母回到舞台前或主桌就座。准备茶具、红包、跪垫。
-
-流程：
-1. 新人先给男方父母敬茶。
-2. 再给女方父母敬茶。
-3. 每对父母约5-7分钟。
-
-台词参考——
-新郎/新娘端茶：“爸、妈，请喝茶。”
-父母喝一口，给红包：“好，以后就是一家人了，好好过日子。”
-新人鞠躬：“谢谢爸、妈。”</div>
         </div>
         <div class="script-block">
           <h3 class="script-title" contenteditable="true">19:35-19:55 男方亲戚给新娘发红包</h3>
@@ -973,13 +974,41 @@ function normalizeChecklistData(data) {
   });
   return data;
 }
+function normalizeGroomRows(rows) {
+  const prevNight = rows.find(r => r[1] === '女方及女方父母入住温州酒店');
+  const noonTea = rows.find(r => r[1] === '敬茶改口（酒店）' || (r[1] === '敬茶改口' && r[0].includes('中午')));
+  const rest = rows.filter(r => !['女方及女方父母入住温州酒店', '敬茶改口', '敬茶改口（酒店）'].includes(r[1]));
+  return [
+    prevNight || ['婚礼前一晚', '女方及女方父母入住温州酒店', '新娘和女方父母提前一晚入住温州酒店，便于第二天中午敬茶及婚礼当天安排', '新娘、女方父母（办理入住）；新郎（提前确认房间、交通和入住时间）', '温州酒店预订、身份证、住宿行李'],
+    noonTea || ['婚礼当天中午', '敬茶改口（酒店）', '改口茶提前至中午在酒店进行；双方父母就座，先给男方父母敬茶，再给女方父母敬茶，每对约5-7分钟', '新郎、新娘（中午在酒店敬茶）；婚礼管家（提前备好茶具、红包、跪垫）', '茶具、跪垫、父母红包'],
+    ...rest,
+  ];
+}
+function normalizeGroomScripts(rows) {
+  const noonTea = rows.find(([title]) => title.includes('中午') && title.includes('敬茶改口'));
+  const rest = rows.filter(([title]) => !title.includes('敬茶改口'));
+  return [
+    noonTea || ['婚礼当天中午 敬茶改口（酒店）', `改口茶提前至婚礼当天中午，在酒店进行。双方父母就座，提前准备茶具、红包、跪垫。
+
+流程：
+1. 新人先给男方父母敬茶。
+2. 再给女方父母敬茶。
+3. 每对父母约5-7分钟。
+
+台词参考——
+新郎/新娘端茶：“爸、妈，请喝茶。”
+父母喝一口，给红包：“好，以后就是一家人了，好好过日子。”
+新人鞠躬：“谢谢爸、妈。”`],
+    ...rest,
+  ];
+}
 function applyState(data) {
-  if (Array.isArray(data.groom)) fillFlowTable('groomTable', data.groom);
+  if (Array.isArray(data.groom)) fillFlowTable('groomTable', normalizeGroomRows(data.groom));
   if (Array.isArray(data.bride)) fillFlowTable('brideTable', data.bride);
   if (Array.isArray(data.venue)) fillVenueTable(data.venue);
   if (Array.isArray(data.staff)) fillStaffTable(data.staff);
   if (Array.isArray(data.checklist)) { checklistData = normalizeChecklistData(data.checklist); renderChecklist(); }
-  if (Array.isArray(data.scripts)) fillScripts(data.scripts);
+  if (Array.isArray(data.scripts)) fillScripts(normalizeGroomScripts(data.scripts));
 }
 
 /* ============ 在线协同（JSONBin 轮询同步） ============ */
